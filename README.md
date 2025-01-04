@@ -1,0 +1,1 @@
+Project for school that uses sound to visualize object it detects using mediapipe. It uses a C++ script to play audio. Audio is played using SFML.

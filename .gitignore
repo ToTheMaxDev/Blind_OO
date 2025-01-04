@@ -1,0 +1,6 @@
+.venv/
+.idea/
+SFML-3.0.0/
+/audio
+efficientdet_lite0.tflite
+Beep SFX.mp3
