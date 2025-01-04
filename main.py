@@ -73,7 +73,6 @@ def main():
         cv2.putText(image, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
         if size_avg:
             cv2.putText(image, str(round(float(size_avg),5)), (100, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
-            pygame.mixer.music.set_volume(round(float(size_avg),5)*2)
         else:
             cv2.putText(image, "NaN", (100, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
 
