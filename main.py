@@ -32,7 +32,7 @@ def visualize(image,detection_result) -> np.ndarray:
 
   return image
 
-pygame.init()
+
 model_path = "./efficientdet_lite0.tflite"
 BaseOptions = mp.tasks.BaseOptions
 ObjectDetector = mp.tasks.vision.ObjectDetector
@@ -47,7 +47,6 @@ detector = ObjectDetector.create_from_options(options)
 
 def main():
     global seen, res, size_avg
-    pygame.mixer.music.load("Beep SFX.mp3")
     # res = (640,480)
     res = (1280, 960)
     curr_frame = 0
@@ -57,7 +56,6 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, res[0])
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, res[1])
     seen = False
-    pygame.mixer.music.set_volume(1)
     if not cap.isOpened():
         print("Cannot open camera")
         exit()
