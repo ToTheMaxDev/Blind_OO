@@ -4,12 +4,26 @@ import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import time
+import platform
+import subprocess
 
 MARGIN = 10  # pixels
 ROW_SIZE = 10  # pixels
 FONT_SIZE = 1
 FONT_THICKNESS = 1
 TEXT_COLOR = (255, 0, 0)  # red
+MAX_RESULTS = 25
+
+def play_sound(file,volume,pitch,position):
+    system = platform.system()
+    if system == "Windows":
+        process = subprocess.Popen(
+            f"wsl export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio {file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
+    elif system == "Linux":
+        process = subprocess.Popen(f"export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio {file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
+    else:
+        return -1
+    return process
 
 
 def visualize(image,detection_result) -> np.ndarray:
@@ -41,7 +55,7 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 
 options = ObjectDetectorOptions(
     base_options=BaseOptions(model_asset_path=model_path),
-    max_results=5,
+    max_results=MAX_RESULTS,
     running_mode=VisionRunningMode.VIDEO)
 detector = ObjectDetector.create_from_options(options)
 
@@ -71,11 +85,6 @@ def main():
         annotated_image = visualize(image_copy, result)
         image = annotated_image #cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
         cv2.putText(image, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
-        if size_avg:
-            cv2.putText(image, str(round(float(size_avg),5)), (100, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
-        else:
-            cv2.putText(image, "NaN", (100, 70), cv2.FONT_HERSHEY_PLAIN, 3, (32, 32, 255), 3)
-
         # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         cv2.imshow('frame', image)
         cv2.waitKey(1)
