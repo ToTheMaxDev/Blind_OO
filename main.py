@@ -18,9 +18,11 @@ def play_sound(file,volume,pitch,position):
     system = platform.system()
     if system == "Windows":
         process = subprocess.Popen(
-            f"wsl export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio {file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
+            f"wsl export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio "
+            f"{file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
     elif system == "Linux":
-        process = subprocess.Popen(f"export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio {file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
+        process = subprocess.Popen(f"export LD_LIBRARY_PATH=./SFML-3.0.0/lib && ./audio "
+                                   f"{file} {volume} {pitch} {position[0]} {position[1]} {position[2]}", shell=False)
     else:
         return -1
     return process
