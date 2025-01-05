@@ -74,7 +74,7 @@ class PoseTrackingDynamic:
 
 def main():
     global seen, res, size_avg
-    pygame.mixer.music.load("Beep SFX.mp3")
+    pygame.mixer.music.load("BeepSFX.mp3")
     # res = (640,480)
     res = (1280, 960)
     ctime = 0
