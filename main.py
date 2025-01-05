@@ -15,6 +15,7 @@ TEXT_COLOR = (255, 0, 0)  # red
 MAX_RESULTS = 5
 SHOW_RESULTS = True
 
+
 def play_sound(file,volume,pitch,position):
     system = platform.system()
     if system == "Windows":
@@ -74,6 +75,7 @@ options = ObjectDetectorOptions(
     max_results=MAX_RESULTS,
     running_mode=VisionRunningMode.VIDEO)
 detector = ObjectDetector.create_from_options(options)
+
 
 def main():
     global seen, res, processes
